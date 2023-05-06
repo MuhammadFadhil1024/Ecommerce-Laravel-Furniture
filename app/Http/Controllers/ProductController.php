@@ -63,6 +63,8 @@ class ProductController extends Controller
      */
     public function store(ProductRequest $request)
     {
+        // dd($request);
+
         $data = $request->all();
         $data['slug'] = Str::slug($request->name);
 

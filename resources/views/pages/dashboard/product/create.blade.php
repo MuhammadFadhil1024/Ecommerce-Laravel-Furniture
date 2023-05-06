@@ -57,7 +57,10 @@
     </div>
     <script src="https://cdn.ckeditor.com/4.18.0/standard/ckeditor.js"></script>
     <script>
-        CKEDITOR.replace( 'description' );
+        CKEDITOR.replace( 'description', {
+            filebrowserUploadUrl: "",
+            filebrowserUploadMethod: 'form'
+        } );
     </script>
 </x-app-layout>
 
