@@ -19,21 +19,24 @@ class ProductTest extends TestCase
 
     public function test_product_screen_can_be_rendered()
     {
-        $product = product::all();
+        $user = User::factory()->create(['roles' => 'ADMIN']); // Create a user
+        $this->actingAs($user);
 
         $response = $this->get(
-            'dashboard/product',
-            ['product' => $product]
+            'dashboard/product'
         );
 
-        $response->assertStatus(302);
+        $response->assertStatus(200);
     }
 
     public function test_product_create_screen_can_be_rendered()
     {
+        $user = User::factory()->create(['roles' => 'ADMIN']); // Create a user
+        $this->actingAs($user);
+
         $response = $this->get('dashboard/product/create');
 
-        $response->assertStatus(302);
+        $response->assertStatus(200);
     }
 
     public function test_users_can_store_product_using_the_create_screen()
