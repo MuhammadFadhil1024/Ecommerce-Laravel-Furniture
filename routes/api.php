@@ -22,5 +22,10 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 
 Route::post('midtrans/callback', [MidtransController::class, 'callback']);
 
-Route::get('/product', [ProductController::class, 'index']);
-Route::post('/product', [ProductController::class, 'store']);
+Route::prefix('/v1')->group(function () {
+    Route::get('/product', [ProductController::class, 'index']);
+    Route::post('/product', [ProductController::class, 'store']);
+    Route::get('/product/{id}', [ProductController::class, 'edit']);
+    Route::put('/product/{id}', [ProductController::class, 'update']);
+    Route::delete('/product/{id}', [ProductController::class, 'delete']);
+});
