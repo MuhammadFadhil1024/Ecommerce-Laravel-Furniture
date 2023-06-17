@@ -2,6 +2,8 @@
 
 namespace Database\Factories;
 
+use App\Models\product;
+use Illuminate\Support\Str;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -14,13 +16,19 @@ class ProductFactory extends Factory
      *
      * @return array<string, mixed>
      */
+
+    protected $model = product::class;
+
     public function definition(): array
     {
+        $name = $this->faker->sentence(3);
+        $slug = Str::slug($name, '-');
+
         return [
-            'name' => $this->faker->name(),
+            'name' => $name,
             'price' => $this->faker->randomNumber(5, true),
             'description' => $this->faker->paragraph(),
-            'slug' => $this->faker->slug()
+            'slug' => $slug
         ];
     }
 }

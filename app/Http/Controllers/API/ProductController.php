@@ -42,7 +42,7 @@ class ProductController extends Controller
         ]);
 
         if ($validator->fails()) {
-            return response()->json($validator->errors(), 422);
+            return response()->json(['message' => 'failed insert product', 'error' => $validator->errors()], 422);
         }
 
         try {
@@ -54,10 +54,10 @@ class ProductController extends Controller
                 return response()->json(['message' => 'product is available'], 422);
             }
 
-            Product::create($product);
+            $product = Product::create($product);
 
             $response = [
-                'message' => 'Product Create',
+                'message' => 'success',
                 'data' => $product
             ];
 
@@ -76,7 +76,10 @@ class ProductController extends Controller
         try {
             $product = Product::find($id);
             if ($product) {
-                return response()->json($product, 200);
+                return response()->json([
+                    'message' => 'success',
+                    'data' => $product
+                ], 200);
             } else {
                 return response()->json([
                     'message' => 'product not found'
@@ -102,7 +105,7 @@ class ProductController extends Controller
             ]);
 
             if ($validator->fails()) {
-                return response()->json($validator->errors(), 422);
+                return response()->json(['message' => 'failed update product', 'error' => $validator->errors()], 422);
             }
 
             $product = Product::find($id);
@@ -146,7 +149,7 @@ class ProductController extends Controller
             if ($product) {
                 $product->delete();
 
-                return response()->json(['message' => 'success'], 201);
+                return response()->json(['message' => 'success'], 200);
             } else {
                 return response()->json(['message' => 'product not found'], 401);
             }

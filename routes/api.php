@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\API\AuthController;
 use App\Http\Controllers\API\MidtransController;
 use App\Http\Controllers\API\ProductController;
 use Illuminate\Http\Request;
@@ -23,9 +24,16 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 Route::post('midtrans/callback', [MidtransController::class, 'callback']);
 
 Route::prefix('/v1')->group(function () {
-    Route::get('/product', [ProductController::class, 'index']);
-    Route::post('/product', [ProductController::class, 'store']);
-    Route::get('/product/{id}', [ProductController::class, 'edit']);
-    Route::put('/product/{id}', [ProductController::class, 'update']);
-    Route::delete('/product/{id}', [ProductController::class, 'delete']);
+
+    Route::post('/register', [AuthController::class, 'registration']);
+    Route::post('/login', [AuthController::class, 'login']);
+    Route::post('/logout', [AuthController::class, 'logout']);
+
+    Route::middleware(['auth:sanctum', 'verified'])->prefix('/dashboard')->group(function () {
+        Route::get('/product', [ProductController::class, 'index']);
+        Route::post('/product', [ProductController::class, 'store']);
+        Route::get('/product/{id}', [ProductController::class, 'edit']);
+        Route::put('/product/{id}', [ProductController::class, 'update']);
+        Route::delete('/product/{id}', [ProductController::class, 'delete']);
+    });
 });

@@ -22,11 +22,15 @@ class ProductTest extends TestCase
         $user = User::factory()->create(['roles' => 'ADMIN']); // Create a user
         $this->actingAs($user);
 
-        $response = $this->get(
-            'dashboard/product'
-        );
+        $product = product::factory()->create(); // Create a product
+
+        $data = product::all();
+
+        $response = $this->get('dashboard/product');
 
         $response->assertStatus(200);
+        $response->assertViewIs('pages.dashboard.product.index');
+        // $response->assertViewHas('pages.dashboard.product.index');
     }
 
     public function test_product_create_screen_can_be_rendered()
@@ -53,6 +57,7 @@ class ProductTest extends TestCase
             'description' => $product->description,
             'slug' => $product->slug
         ]);
+        $response->assertStatus(302);
         $response->assertRedirectToRoute('dashboard.product.index');
     }
 
