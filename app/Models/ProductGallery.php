@@ -13,4 +13,9 @@ class ProductGallery extends Model
     protected $fillable = [
         'id_products', 'url', 'is_featured'
     ];
+
+    public function products()
+    {
+        return $this->belongsTo(product::class, 'id');
+    }
 }

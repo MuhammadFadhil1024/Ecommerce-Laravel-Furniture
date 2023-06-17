@@ -3,6 +3,7 @@
 use App\Http\Controllers\API\AuthController;
 use App\Http\Controllers\API\MidtransController;
 use App\Http\Controllers\API\ProductController;
+use App\Http\Controllers\API\ProductGalleriesController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -30,10 +31,18 @@ Route::prefix('/v1')->group(function () {
     Route::post('/logout', [AuthController::class, 'logout']);
 
     Route::middleware(['auth:sanctum', 'verified'])->prefix('/dashboard')->group(function () {
+
+        // Route for product
         Route::get('/product', [ProductController::class, 'index']);
         Route::post('/product', [ProductController::class, 'store']);
         Route::get('/product/{id}', [ProductController::class, 'edit']);
         Route::put('/product/{id}', [ProductController::class, 'update']);
         Route::delete('/product/{id}', [ProductController::class, 'delete']);
+
+        // route for product galleries
+        Route::get('/product/galleries/{product_id}', [ProductGalleriesController::class, 'index']);
+        Route::post('/product/galleries/{product_id}', [ProductGalleriesController::class, 'store']);
+        Route::put('/product/galleries/{photo_id}', [ProductGalleriesController::class, 'status']);
+        Route::delete('/product/galleries/{photo_id}', [ProductGalleriesController::class, 'delete']);
     });
 });

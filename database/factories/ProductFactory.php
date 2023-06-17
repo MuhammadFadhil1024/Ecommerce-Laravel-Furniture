@@ -17,7 +17,7 @@ class ProductFactory extends Factory
      * @return array<string, mixed>
      */
 
-    protected $model = product::class;
+    // protected $model = product::class;
 
     public function definition(): array
     {
