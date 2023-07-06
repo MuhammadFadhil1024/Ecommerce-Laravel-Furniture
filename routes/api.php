@@ -4,6 +4,7 @@ use App\Http\Controllers\API\AuthController;
 use App\Http\Controllers\API\MidtransController;
 use App\Http\Controllers\API\ProductController;
 use App\Http\Controllers\API\ProductGalleriesController;
+use App\Http\Controllers\API\TransactionController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -44,5 +45,10 @@ Route::prefix('/v1')->group(function () {
         Route::post('/product/galleries/{product_id}', [ProductGalleriesController::class, 'store']);
         Route::put('/product/galleries/{photo_id}', [ProductGalleriesController::class, 'status']);
         Route::delete('/product/galleries/{photo_id}', [ProductGalleriesController::class, 'delete']);
+
+        // route for transaction
+        Route::get('/transaction', [TransactionController::class, 'index']);
+        Route::put('/transaction/{id}', [TransactionController::class, 'update']);
+        Route::get('/transaction/{id}', [TransactionController::class, 'show']);
     });
 });
