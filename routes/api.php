@@ -5,6 +5,7 @@ use App\Http\Controllers\API\MidtransController;
 use App\Http\Controllers\API\ProductController;
 use App\Http\Controllers\API\ProductGalleriesController;
 use App\Http\Controllers\API\TransactionController;
+use App\Http\Controllers\API\UserController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -50,5 +51,8 @@ Route::prefix('/v1')->group(function () {
         Route::get('/transaction', [TransactionController::class, 'index']);
         Route::put('/transaction/{id}', [TransactionController::class, 'update']);
         Route::get('/transaction/{id}', [TransactionController::class, 'show']);
+
+        // Route for User
+        Route::get('/users', [UserController::class, 'index']);
     });
 });
