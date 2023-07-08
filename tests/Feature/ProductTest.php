@@ -38,7 +38,7 @@ class ProductTest extends TestCase
         $user = User::factory()->create(['roles' => 'ADMIN']); // Create a user
         $this->actingAs($user);
 
-        $response = $this->get('dashboard/product/create');
+        $response = $this->get(route('dashboard.product.create'));
 
         $response->assertStatus(200);
     }
@@ -49,13 +49,11 @@ class ProductTest extends TestCase
         $user = User::factory()->create(['roles' => 'ADMIN']); // Create a user
         $this->actingAs($user);
 
-        $product = product::factory()->create();
-
         $response = $this->post('dashboard/product', [
-            'name' => $product->name,
-            'price' => $product->price,
-            'description' => $product->description,
-            'slug' => $product->slug
+            'name' => 'Nama jalan',
+            'price' => 200000,
+            'description' => 'lorem ipsum',
+            'slug' => 'nama-jalan'
         ]);
         $response->assertStatus(302);
         $response->assertRedirectToRoute('dashboard.product.index');
