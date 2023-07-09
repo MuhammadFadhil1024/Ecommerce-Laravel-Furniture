@@ -42,7 +42,7 @@ class TransactionController extends Controller
 
 
         if ($validator->fails()) {
-            return response()->json(['message' => 'failed insert product', 'error' => $validator->errors()], 422);
+            return response()->json(['message' => 'failed update status transaction', 'error' => $validator->errors()], 422);
         }
 
         try {
@@ -60,7 +60,7 @@ class TransactionController extends Controller
                 ], 200);
             } else {
                 return response()->json([
-                    'message' => 'tranasaction not found'
+                    'message' => 'transaction not found'
                 ], 404);
             }
         } catch (\Exception $e) {
@@ -85,7 +85,7 @@ class TransactionController extends Controller
                 ], 200);
             } else {
                 return response()->json([
-                    'message' => 'tranasaction not found'
+                    'message' => 'transaction not found'
                 ], 404);
             }
         } catch (\Exception $e) {
