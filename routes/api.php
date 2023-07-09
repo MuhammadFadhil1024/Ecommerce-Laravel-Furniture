@@ -32,7 +32,7 @@ Route::prefix('/v1')->group(function () {
     Route::post('/login', [AuthController::class, 'login']);
     Route::post('/logout', [AuthController::class, 'logout']);
 
-    Route::middleware(['auth:sanctum', 'verified'])->prefix('/dashboard')->group(function () {
+    Route::middleware(['auth:sanctum', 'verified', 'admin'])->prefix('/dashboard')->group(function () {
 
         // Route for product
         Route::get('/product', [ProductController::class, 'index']);
@@ -54,5 +54,7 @@ Route::prefix('/v1')->group(function () {
 
         // Route for User
         Route::get('/users', [UserController::class, 'index']);
+        Route::put('/users/{id}', [UserController::class, 'update']);
+        Route::delete('/users/{id}', [UserController::class, 'delete']);
     });
 });
