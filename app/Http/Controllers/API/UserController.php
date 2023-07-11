@@ -61,7 +61,7 @@ class UserController extends Controller
                 return response()->json([
                     'message' => 'success',
                     'data' => $user
-                ]);
+                ], 200);
             } else {
                 return response()->json([
                     'message' => 'user not found'
