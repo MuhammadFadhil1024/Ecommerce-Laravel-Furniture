@@ -242,7 +242,7 @@ class ApiProductTest extends TestCase
 
         $response = $this->delete('api/v1/dashboard/product/' . 0);
 
-        $response->assertStatus(401)
+        $response->assertStatus(404)
             ->assertJsonStructure(['message'])
             ->assertJson([
                 'message' => 'product not found',
