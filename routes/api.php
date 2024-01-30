@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\API\AuthController;
+use App\Http\Controllers\API\FrontendController;
 use App\Http\Controllers\API\MidtransController;
 use App\Http\Controllers\API\ProductController;
 use App\Http\Controllers\API\ProductGalleriesController;
@@ -31,6 +32,8 @@ Route::prefix('/v1')->group(function () {
     Route::post('/register', [AuthController::class, 'registration']);
     Route::post('/login', [AuthController::class, 'login']);
     Route::post('/logout', [AuthController::class, 'logout']);
+
+    Route::get('/justarrived', [FrontendController::class, 'justArrived']);
 
     Route::middleware(['auth:sanctum', 'verified', 'admin'])->prefix('/dashboard')->group(function () {
 

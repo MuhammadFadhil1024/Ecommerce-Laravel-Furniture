@@ -19,9 +19,9 @@ class CreateProductsTable extends Migration
             $table->string('name');
             $table->bigInteger('price');
             $table->longText('description');
-
+            $table->bigInteger('stock');
+            $table->bigInteger('weight');
             $table->string('slug')->unique();
-
             $table->softDeletes();
             $table->timestamps();
         });

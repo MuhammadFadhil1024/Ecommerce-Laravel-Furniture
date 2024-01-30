@@ -9,19 +9,36 @@
         <script>
             var datatable = $('#crudTable').DataTable({
                 ajax: {
-                    url : '{!! url()->current() !!}'
+                    url: '{!! url()->current() !!}'
                     // url yang sedang dibuka sekarang
                 },
-                columns: [
-                    {data : 'id', name: 'id', width: '5%'},
-                    {data : 'name', name: 'name'},
-                    {data : 'price', name: 'price'},
+                columns: [{
+                        data: 'id',
+                        name: 'id',
+                        width: '5%'
+                    },
                     {
-                        data : 'action',
-                        name : 'action',
-                        ordertable : false,
-                        searchable : false,
-                        width : '25%'
+                        data: 'name',
+                        name: 'name'
+                    },
+                    {
+                        data: 'price',
+                        name: 'price'
+                    },
+                    {
+                        data: 'stock',
+                        name: 'stock'
+                    },
+                    {
+                        data: 'weight',
+                        name: 'weight'
+                    },
+                    {
+                        data: 'action',
+                        name: 'action',
+                        ordertable: false,
+                        searchable: false,
+                        width: '25%'
                     }
                 ]
 
@@ -32,7 +49,8 @@
     <div class="py-12">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="mb-10">
-                <a href="{{route('dashboard.product.create')}}"  class="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded shadow-lg">
+                <a href="{{ route('dashboard.product.create') }}"
+                    class="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded shadow-lg">
                     + create product
                 </a>
             </div>
@@ -42,8 +60,10 @@
                         <thead>
                             <tr>
                                 <th>ID</th>
-                                <th>Nama</th>
-                                <th>Harga</th>
+                                <th>Name</th>
+                                <th>Price</th>
+                                <th>Stock</th>
+                                <th>Weight</th>
                                 <th>Aksi</th>
                             </tr>
                         </thead>

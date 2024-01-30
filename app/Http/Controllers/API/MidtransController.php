@@ -51,7 +51,7 @@ class MidtransController extends Controller
             $transaction->status = 'PENDING';
         } elseif ($status = 'expire') {
             $transaction->status = 'CANCELLED';
-        } elseif ($tatus = 'cancel') {
+        } elseif ($status = 'cancel') {
             $transaction->status = 'CANCELLED';
         }
 

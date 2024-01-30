@@ -15,23 +15,13 @@ class CreateTransactionsTable extends Migration
     {
         Schema::create('transactions', function (Blueprint $table) {
             $table->id();
-
             $table->bigInteger('id_users');
-
-            $table->string('name')->nullable();
-            $table->string('email')->nullable();
-            $table->text('address')->nullable();
-            $table->string('phone')->nullable();
-
             $table->string('courier')->nullable();
-
+            $table->bigInteger('address_id');
             $table->string('payment')->default('MIDTRANS');
             $table->string('payment_url')->nullable();
-
-            
             $table->bigInteger('total_price')->default(0);
             $table->string('status')->default('PENDING');
-
             $table->softDeletes();
             $table->timestamps();
         });

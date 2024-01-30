@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Helpers\RajaOngkir;
 use App\Models\Transaction;
 use Illuminate\Http\Request;
 use App\Models\TransactionItem;
@@ -17,8 +18,9 @@ class MyTransactionsController extends Controller
      */
     public function index()
     {
+        // dd($query->get());
         if (request()->ajax()) {
-            $query = Transaction::with(['users'])->where('id_users', Auth::user()->id);
+            $query = Transaction::with(['users', 'adresses'])->where('id_users', Auth::user()->id);
             return DataTables::of($query)
                 ->addColumn('action', function ($item) {
                     return '
@@ -33,7 +35,7 @@ class MyTransactionsController extends Controller
                 })
                 ->make();
         }
-        return view('pages.dashboard.transaction.index');
+        return view('pages.dashboard.myTransaction.index');
     }
 
     /**
@@ -65,6 +67,11 @@ class MyTransactionsController extends Controller
      */
     public function show(Transaction $my_transaction)
     {
+        $dataTransaction = $my_transaction->load(['users', 'adresses']);
+        
+        $address = RajaOngkir::getCity($my_transaction->adresses->city, $my_transaction->adresses->provinces);
+        // dd($address);
+
         if (request()->ajax()) {
             $query = TransactionItem::with(['product'])->where('id_transactions', $my_transaction->id);
 
@@ -75,8 +82,9 @@ class MyTransactionsController extends Controller
                 ->rawColumns(['actions'])
                 ->make();
         }
-        return view('pages.dashboard.transaction.show', [
-            'transaction' => $my_transaction
+        return view('pages.dashboard.myTransaction.show', [
+            'transaction' => $dataTransaction,
+            'address' => $address
         ]);
     }
 
