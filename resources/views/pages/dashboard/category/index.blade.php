@@ -1,7 +1,7 @@
 <x-app-layout>
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-            {{ __('Product') }}
+            {{ __('Category') }}
         </h2>
     </x-slot>
 
@@ -22,20 +22,8 @@
                         name: 'name'
                     },
                     {
-                        data: 'phone',
-                        name: 'phone'
-                    },
-                    {
-                        data: 'courier',
-                        name: 'courier'
-                    },
-                    {
-                        data: 'total_price',
-                        name: 'total_price'
-                    },
-                    {
-                        data: 'status',
-                        name: 'status'
+                        data: 'thumbnile_category_url', 
+                        name: 'thumbnile_category_url'
                     },
                     {
                         data: 'action',
@@ -52,18 +40,21 @@
 
     <div class="py-12">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
+            <div class="mb-10">
+                <a href="{{ route('dashboard.category.create') }}"
+                    class="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded shadow-lg">
+                    + create category
+                </a>
+            </div>
             <div class="shadow overflow-hidden sm-rounded-md">
                 <div class="px-4 py-5 bg-white sm:p-6">
                     <table id="crudTable">
                         <thead>
                             <tr>
                                 <th>ID</th>
-                                <th>Nama</th>
-                                <th>Telephone</th>
-                                <th>Kurir</th>
-                                <th>Total Harga</th>
-                                <th>Status</th>
-                                <th>Aksi</th>
+                                <th>Name</th>
+                                <th>Photo</th>
+                                <th>Action</th>
                             </tr>
                         </thead>
                         <tbody></tbody>

@@ -9,13 +9,22 @@
         <script>
             var datatable = $('#crudTable').DataTable({
                 ajax: {
-                    url : '{!! url()->current() !!}'
+                    url: '{!! url()->current() !!}'
                     // url yang sedang dibuka sekarang
                 },
-                columns: [
-                    {data : 'id', name: 'id', width: '5%'},
-                    {data : 'product.name', name: 'product.name'},
-                    {data : 'product.price', name: 'product.price'}
+                columns: [{
+                        data: 'id',
+                        name: 'id',
+                        width: '5%'
+                    },
+                    {
+                        data: 'product.name',
+                        name: 'product.name'
+                    },
+                    {
+                        data: 'product.price',
+                        name: 'product.price'
+                    }
                 ]
             })
         </script>
@@ -33,39 +42,41 @@
                         <tbody>
                             <tr>
                                 <th class="border px-6 py-4 text-right">Name</th>
-                                <td class="border px-6 py-4">{{$transaction->name}}</td>
+                                <td class="border px-6 py-4">{{ $transaction->users->name }}</td>
                             </tr>
                             <tr>
                                 <th class="border px-6 py-4 text-right">Email</th>
-                                <td class="border px-6 py-4">{{$transaction->email}}</td>
+                                <td class="border px-6 py-4">{{ $transaction->users->email }}</td>
                             </tr>
                             <tr>
                                 <th class="border px-6 py-4 text-right">Alamat</th>
-                                <td class="border px-6 py-4">{{$transaction->address}}</td>
+                                <td class="border px-6 py-4">
+                                    {{ $my_address['type'] . ' ' . $my_address['city_name'] . ' ' . $my_address['province'] . ', ' . $my_address['postal_code'] }}
+                                </td>
                             </tr>
                             <tr>
                                 <th class="border px-6 py-4 text-right">Phone</th>
-                                <td class="border px-6 py-4">{{$transaction->phone}}</td>
+                                <td class="border px-6 py-4">{{ $transaction->adresses->telphone_number }}</td>
                             </tr>
                             <tr>
                                 <th class="border px-6 py-4 text-right">Kurir</th>
-                                <td class="border px-6 py-4">{{$transaction->courier}}</td>
+                                <td class="border px-6 py-4">{{ $transaction->courier }}</td>
                             </tr>
                             <tr>
                                 <th class="border px-6 py-4 text-right">Payment</th>
-                                <td class="border px-6 py-4">{{$transaction->payment}}</td>
+                                <td class="border px-6 py-4">{{ $transaction->payment }}</td>
                             </tr>
                             <tr>
                                 <th class="border px-6 py-4 text-right">Alamat Pembayaran</th>
-                                <td class="border px-6 py-4">{{$transaction->payment_url}}</td>
+                                <td class="border px-6 py-4">{{ $transaction->payment_url }}</td>
                             </tr>
                             <tr>
                                 <th class="border px-6 py-4 text-right">Total harga</th>
-                                <td class="border px-6 py-4">{{$transaction->total_price}}</td>
+                                <td class="border px-6 py-4">{{ $transaction->total_price }}</td>
                             </tr>
                             <tr>
                                 <th class="border px-6 py-4 text-right">Status</th>
-                                <td class="border px-6 py-4">{{$transaction->status}}</td>
+                                <td class="border px-6 py-4">{{ $transaction->status }}</td>
                             </tr>
                         </tbody>
                     </table>

@@ -137,18 +137,18 @@
                 @endforelse
 
             </div>
-            <div class="flex justify-between items-center mx-auto bg-gray-100 rounded-xl px-6 py-8 mt-8">
-                <div class="px-4">
+            <div class="flex justify-end items-center mx-auto bg-gray-100 rounded-xl px-6 py-8 mt-8">
+                {{-- <div class="px-4">
                     <h4 class="font-semibold text-lg md:text-xl">
                         Total IDR
                     </h4>
                     <p class="text-lg md:text-xl">
                         {{ number_format($total_carts_price) }}
                     </p>
-                </div>
+                </div> --}}
                 <div class="md:shrink w-6/12">
                     <a type="button" href="{{ route('checkout') }}"
-                        class="bg-pink-400 text-black hover:bg-black hover:text-pink-400 focus:outline-none w-full py-3 rounded-full text-center md:text-lg focus:text-black transition-all duration-200 px-6">
+                        class="bg-pink-400 text-black hover:bg-rose-700 focus:outline-none w-full py-3 rounded-full text-center md:text-lg focus:text-black transition-all duration-200 px-6">
                         Checkout
                     </a>
                 </div>
@@ -157,15 +157,15 @@
     </section>
     <!-- END: COMPLETE YOUR ROOM -->
     <script>
-        $(document).ready(function () {
-    
+        $(document).ready(function() {
+
             // FUNCTION FOR INCREASE QUANTITY CART 
-            $('.incrase-quantity-form').on('submit', function (e) {
+            $('.incrase-quantity-form').on('submit', function(e) {
                 e.preventDefault();
-    
+
                 var CSRF_TOKEN = $('meta[name="csrf-token"]').attr('content');
                 var productId = $(this).data('product-id');
-    
+
                 $.ajax({
                     type: 'PUT',
                     dataType: 'json',
@@ -175,28 +175,29 @@
                         quantity: 1,
                         productItemCartId: productId
                     },
-                    success: function (response) {
+                    success: function(response) {
                         console.log(response);
                         updateQuantityDisplay(productId, response);
                     },
-                    error: function (error) {
+                    error: function(error) {
                         console.log(error);
                     }
                 });
             });
             // END OF FUNCTION FOR INCREASE QUANTITY CART 
-    
+
             // FUNCTION FOR DECREASE QUANTITY CART 
-            $('.decrase-quantity-form').on('submit', function (e) {
+            $('.decrase-quantity-form').on('submit', function(e) {
                 e.preventDefault();
-    
+
                 var CSRF_TOKEN = $('meta[name="csrf-token"]').attr('content');
                 var productId = $(this).data('product-id');
                 var quantityDisplayWeb = $('.quantityDisplayWeb[data-product-id="' + productId + '"]');
-                var quantityDisplayMobile = $('.quantityDisplayMobile[data-product-id="' + productId + '"]');
+                var quantityDisplayMobile = $('.quantityDisplayMobile[data-product-id="' + productId +
+                    '"]');
                 var quantityValueWeb = parseInt(quantityDisplayWeb.text());
                 var quantityValueMobile = parseInt(quantityDisplayMobile.text());
-    
+
                 if (quantityValueWeb > 1) {
                     // If quantity is greater than 1, decrease the quantity
                     $.ajax({
@@ -208,11 +209,11 @@
                             quantity: 1,
                             productItemCartId: productId
                         },
-                        success: function (response) {
+                        success: function(response) {
                             console.log(response);
                             updateQuantityDisplay(productId, response);
                         },
-                        error: function (error) {
+                        error: function(error) {
                             console.log(error);
                         }
                     });
@@ -220,11 +221,12 @@
                     // If quantity is 1 or less, prompt for deletion or take appropriate action
                     console.log('quantity is 1 or less');
                     // Disable the decrease button for the specific product
-                    $('.decrase-quantity-form[data-product-id="' + productId + '"] button').prop('disabled', true);
+                    $('.decrase-quantity-form[data-product-id="' + productId + '"] button').prop('disabled',
+                        true);
                 }
             });
             // END OF FUNCTION FOR DECREASE QUANTITY CART 
-    
+
             // Function to update quantity display for a specific product
             function updateQuantityDisplay(productId, newQuantity) {
                 var quantityDisplayWeb = $('.quantityDisplayWeb[data-product-id="' + productId + '"]');
@@ -236,5 +238,4 @@
             }
         });
     </script>
-        
 @endsection

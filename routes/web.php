@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AddressController;
+use App\Http\Controllers\CategoryController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\FrontendController;
 use App\Http\Controllers\DashboardController;
@@ -64,5 +65,6 @@ Route::middleware(['auth:sanctum', 'verified'])->name('dashboard.')->prefix('das
         Route::resource('user', UserController::class)->only([
             'index', 'show', 'edit', 'update', 'destroy'
         ]);
+        Route::resource('category', CategoryController::class);
     });
 });

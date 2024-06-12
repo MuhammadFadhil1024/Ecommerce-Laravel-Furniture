@@ -2,11 +2,12 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\TransactionRequest;
+use App\Helpers\RajaOngkir;
 use App\Models\Transaction;
-use App\Models\TransactionItem;
 use Illuminate\Http\Request;
+use App\Models\TransactionItem;
 use Yajra\DataTables\Facades\DataTables;
+use App\Http\Requests\TransactionRequest;
 
 class TransactionController extends Controller
 {
@@ -18,7 +19,8 @@ class TransactionController extends Controller
     public function index()
     {
         if (request()->ajax()) {
-            $query = Transaction::query();
+            $query = Transaction::with('users', 'adresses');
+            // dd($query);
             return DataTables::of($query)
                 ->addColumn('action', function ($item) {
                     return '
@@ -33,6 +35,12 @@ class TransactionController extends Controller
                 ->rawColumns(['action'])
                 ->editColumn('total_price', function ($item) {
                     return number_format($item->total_price);
+                })
+                ->editColumn('name', function ($item) {
+                    return $item->users->name;
+                })
+                ->editColumn('phone', function ($item) {
+                    return $item->adresses->telphone_number;
                 })
                 ->make();
         }
@@ -67,17 +75,26 @@ class TransactionController extends Controller
      */
     public function show(Transaction $transaction)
     {
-        if (request()->ajax()) {
-            $query = TransactionItem::with(['product'])->where('id_transactions', $transaction->id);
+        try {
+            if (request()->ajax()) {
+                $query = TransactionItem::with(['product'])->where('id_transactions', $transaction->id);
+    
+                return DataTables::of($query)
+                    ->editColumn('product.price', function ($item) {
+                        return number_format($item->product->price);
+                    })
+                    ->rawColumns(['actions'])
+                    ->make();
+            }
 
-            return DataTables::of($query)
-                ->editColumn('product.price', function ($item) {
-                    return number_format($item->product->price);
-                })
-                ->rawColumns(['actions'])
-                ->make();
+            $address = $transaction->adresses->toArray();
+            $my_address = RajaOngkir::getCity($address['city'], $address['provinces']);
+            // dd($my_address);
+
+            return view('pages.dashboard.transaction.show', compact('transaction', 'my_address'));
+        } catch (\Exception $e) {
+            dd($e->getMessage());
         }
-        return view('pages.dashboard.transaction.show', compact('transaction'));
     }
 
     /**
