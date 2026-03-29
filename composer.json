@@ -16,6 +16,7 @@
         "laravel/tinker": "^2.8",
         "livewire/livewire": "^2.5",
         "midtrans/midtrans-php": "^2.5",
+        "realrashid/sweet-alert": "^7.1",
         "yajra/laravel-datatables-oracle": "^10.0"
     },
     "require-dev": {

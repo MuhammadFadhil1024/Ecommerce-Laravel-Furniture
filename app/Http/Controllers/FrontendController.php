@@ -123,9 +123,6 @@ class FrontendController extends Controller
         // dd([$dataCartsMap, $dataCartsMap->sum('subTotal')]);
         // dd($totalWeight);
 
-
-
-
         return view('pages/frontend/checkout', [
             'carts' => [
                 'carts' => $dataCartsMap,
@@ -275,6 +272,19 @@ class FrontendController extends Controller
             $productOnCart->save();
             
             return response()->json($productOnCart->quantity);
+        } catch (\Exception $e) {
+            return response()->json($e->getMessage());
+        }
+    }
+
+    public function deleteCart(Request $request)
+    {
+        try {
+            $productOnCart = Cart::find($request->productItemCartId);
+
+            $productOnCart->delete();
+
+            return response()->json(200);
         } catch (\Exception $e) {
             return response()->json($e->getMessage());
         }

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\ProductRequest;
+use App\Models\Category;
 use Illuminate\Http\Request;
 use App\Models\Product;
 use Yajra\DataTables\Facades\DataTables;
@@ -52,7 +53,11 @@ class ProductController extends Controller
      */
     public function create()
     {
-        return view('pages.dashboard.product.create');
+        $categories = Category::all();
+
+        return view('pages.dashboard.product.create', [
+            'categories' => $categories
+        ]);
     }
 
     /**

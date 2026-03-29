@@ -20,5 +20,8 @@
         "postcss": "^8.4.12",
         "postcss-import": "^14.0.1",
         "tailwindcss": "^3.0.23"
+    },
+    "dependencies": {
+        "toastr": "^2.1.4"
     }
 }

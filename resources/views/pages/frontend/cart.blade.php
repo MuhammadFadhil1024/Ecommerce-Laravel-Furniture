@@ -221,8 +221,27 @@
                     // If quantity is 1 or less, prompt for deletion or take appropriate action
                     console.log('quantity is 1 or less');
                     // Disable the decrease button for the specific product
-                    $('.decrase-quantity-form[data-product-id="' + productId + '"] button').prop('disabled',
-                        true);
+
+                    $.ajax({
+                        type: 'DELETE',
+                        dataType: 'json',
+                        url: '/cart/delete/',
+                        data: {
+                            _token: CSRF_TOKEN,
+                            quantity: 1,
+                            productItemCartId: productId
+                        },
+                        success: function(response) {
+                            window.location.reload(true)
+                        },
+                        error: function(error) {
+                            console.log(error);
+                        }
+                    });
+
+                    // $('.decrase-quantity-form[data-product-id="' + productId + '"] button').prop('disabled',
+                    //     true);
+
                 }
             });
             // END OF FUNCTION FOR DECREASE QUANTITY CART 
