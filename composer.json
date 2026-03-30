@@ -10,15 +10,16 @@
     "require": {
         "php": "^8.1",
         "guzzlehttp/guzzle": "^7.0.1",
-        "laravel/framework": "^11.0",
+        "laravel/framework": "^12.0",
         "laravel/jetstream": "^5.0",
         "laravel/sanctum": "^4.0",
         "laravel/tinker": "^2.8",
         "livewire/livewire": "^3.6.4",
         "midtrans/midtrans-php": "^2.5",
         "realrashid/sweet-alert": "^7.1",
-        "yajra/laravel-datatables": "^11.0",
-        "yajra/laravel-datatables-oracle": "^11.0"
+        "yajra/laravel-datatables": "^12.0",
+        "yajra/laravel-datatables-oracle": "^12.0",
+        "pestphp/pest": "^3.0"
     },
     "require-dev": {
         "barryvdh/laravel-debugbar": "^3.9",
@@ -26,7 +27,7 @@
         "laravel/sail": "^1.18",
         "mockery/mockery": "^1.4.4",
         "nunomaduro/collision": "^8.1",
-        "phpunit/phpunit": "^10.0",
+        "phpunit/phpunit": "^11.0",
         "spatie/laravel-ignition": "^2.0"
     },
     "autoload": {
@@ -64,7 +65,10 @@
     "config": {
         "optimize-autoloader": true,
         "preferred-install": "dist",
-        "sort-packages": true
+        "sort-packages": true,
+        "allow-plugins": {
+            "pestphp/pest-plugin": true
+        }
     },
     "minimum-stability": "stable",
     "prefer-stable": true
