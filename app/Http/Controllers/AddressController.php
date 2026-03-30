@@ -60,7 +60,7 @@ class AddressController extends Controller
 
 
         $cities = RajaOngkir::getAllCity();
-        // dd($cities);
+        dd($cities);
         $data = [];
         foreach ($cities as $key => $city) {
             $cityData = [

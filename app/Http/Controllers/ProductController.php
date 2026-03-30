@@ -41,7 +41,7 @@ class ProductController extends Controller
                 ->editColumn('price', function ($item) {
                     return number_format($item->price);
                 })
-                ->make();
+                ->make(true);
         }
         return view('pages.dashboard.product.index');
     }
